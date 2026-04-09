@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, Search, FileText, Briefcase, ChevronRight, Activity, ShieldCheck, Globe, Star, Zap } from 'lucide-react';
+import { ArrowRight, CheckCircle, Briefcase, Activity, ShieldCheck, Globe, Star, Zap, Building, Rocket, Lightbulb } from 'lucide-react';
 import opportunities from '@/data/index';
 
 export default function Home() {
@@ -45,6 +45,41 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* WHO THIS IS FOR (Audience) */}
+      <section className="section-padding" style={{ background: '#ffffff', borderBottom: '1px solid var(--border)' }}>
+        <div className="container" style={{ textAlign: 'center' }}>
+          <h2 style={{ marginBottom: '3rem' }}>Built for European Builders</h2>
+          <div className="grid grid-3">
+             <div style={{ padding: '1rem' }}>
+                <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Startups</h3>
+                <p style={{ color: 'var(--text-muted)' }}>From pre-seed deep tech spin-offs to Series A scale-ups seeking non-dilutive leverage.</p>
+             </div>
+             <div style={{ padding: '1rem', borderLeft: '1px solid var(--border)', borderRight: '1px solid var(--border)' }}>
+                <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>SMEs</h3>
+                <p style={{ color: 'var(--text-muted)' }}>Traditional Mittelstand and European small enterprises targeting digital transformation subsidies.</p>
+             </div>
+             <div style={{ padding: '1rem' }}>
+                <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Innovation-led Companies</h3>
+                <p style={{ color: 'var(--text-muted)' }}>Enterprise hardware, climate-tech, and clinical biotech companies financing €1M+ heavy R&D cycles.</p>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WHY TRUST US (Methodology) */}
+      <section className="section-padding" style={{ background: '#f8fafc', borderBottom: '1px solid var(--border)' }}>
+        <div className="container" style={{ maxWidth: '800px', textAlign: 'center' }}>
+          <ShieldCheck size={48} color="var(--primary)" style={{ margin: '0 auto 1.5rem' }} />
+          <h2 style={{ marginBottom: '1.5rem' }}>Why Trust This Platform?</h2>
+          <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', marginBottom: '2rem', lineHeight: 1.6 }}>
+            The public funding sector is full of noise, outdated PDFs, and predatory consultants. EU Funding Intel operates on a strict verification methodology. Every grant, loan, and tender in our database is manually checked against its official source authority, with clear timestamps and un-gated application links.
+          </p>
+          <Link href="/methodology" style={{ color: 'var(--primary)', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'underline', textUnderlineOffset: '4px' }}>
+             Read our Data Methodology <ArrowRight size={16} />
+          </Link>
+        </div>
+      </section>
 
       {/* HOW IT WORKS */}
       <section className="section-padding" style={{ background: '#ffffff' }}>
@@ -107,21 +142,27 @@ export default function Home() {
           </div>
           <div className="grid grid-3">
              {verifiedOpps.map(opp => (
-                <Link href={`/opportunity/${opp.slug}`} key={opp.slug} className="card" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column' }}>
-                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', alignItems: 'flex-start' }}>
-                      <span style={{ fontSize: '0.75rem', padding: '0.2rem 0.6rem', background: 'var(--bg-color)', border: '1px solid var(--border)', color: '#334155', borderRadius: '4px', fontWeight: 600 }}>
+                <Link href={`/opportunity/${opp.slug}`} key={opp.slug} className="card" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', border: '1px solid var(--border)' }}>
+                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.75rem', padding: '0.3rem 0.6rem', background: 'var(--bg-color)', color: '#334155', borderRadius: '4px', fontWeight: 700, letterSpacing: '0.5px' }}>
                          {opp.opportunity_model.toUpperCase()}
                       </span>
-                      <span style={{ fontSize: '0.8rem', color: '#10b981', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
-                         <CheckCircle size={14} /> Verified
+                      <span style={{ fontSize: '0.8rem', color: '#059669', background: '#d1fae5', padding: '0.3rem 0.6rem', borderRadius: '4px', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 700 }}>
+                         <CheckCircle size={14} /> VERIFIED
                       </span>
                    </div>
-                   <h3 style={{ fontSize: '1.15rem', marginBottom: '0.75rem', flex: 1, lineHeight: 1.4 }}>{opp.title}</h3>
-                   <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
-                      {opp.provider_organization || opp.source_authority} &middot; {opp.country}
+                   <h3 style={{ fontSize: '1.2rem', marginBottom: '0.75rem', flex: 1, lineHeight: 1.4 }}>{opp.title}</h3>
+                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1.5rem', borderTop: '1px solid var(--bg-color)', paddingTop: '1rem' }}>
+                      <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <Building size={16} /> {opp.provider_organization || opp.source_authority}
+                      </span>
+                      <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <Globe size={16} /> {opp.country}
+                      </span>
                    </div>
-                   <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1rem', color: '#334155', fontSize: '0.85rem', fontWeight: 600 }}>
-                      Deadline: {opp.application_deadline || "Rolling / Varies"}
+                   <div style={{ background: 'var(--bg-color)', padding: '0.8rem 1rem', borderRadius: '6px', color: '#0f172a', fontSize: '0.9rem', fontWeight: 600, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span>Deadline:</span>
+                      <span>{opp.application_deadline || "Rolling"}</span>
                    </div>
                 </Link>
              ))}
